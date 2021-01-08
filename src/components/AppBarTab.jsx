@@ -1,19 +1,26 @@
-import { Text, TouchableWithoutFeedback, StyleSheet } from "react-native";
+import { Text, TouchableWithoutFeedback, StyleSheet, View } from "react-native";
 import React from "react";
+import theme from "../theme";
+import { Link } from "react-router-native";
 
 const styles = StyleSheet.create({
+  container: {
+    marginRight: 10,
+    paddingRight: 20,
+  },
   text: {
     color: "white",
-    fontSize: 24,
-    padding: "5%",
+    fontSize: theme.fontSizes.subheading,
   },
 });
 
-const AppBarTab = ({ text, onPress }) => {
+const AppBarTab = ({ text, link }) => {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <Text style={styles.text}>{text}</Text>
-    </TouchableWithoutFeedback>
+    <View style={styles.container}>
+      <Link to={link} component={TouchableWithoutFeedback}>
+        <Text style={styles.text}>{text}</Text>
+      </Link>
+    </View>
   );
 };
 
