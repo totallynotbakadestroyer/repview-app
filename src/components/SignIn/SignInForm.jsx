@@ -1,8 +1,8 @@
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
 import React from "react";
-import theme from "../theme.js";
-import Text from "./Text.jsx";
-import FormikTextInput from "./FormikTextInput.jsx";
+import theme from "../../theme.js";
+import Text from "../Text.jsx";
+import FormikTextInput from "../FormikTextInput.jsx";
 
 const SignInForm = () => {
   const styles = StyleSheet.create({
