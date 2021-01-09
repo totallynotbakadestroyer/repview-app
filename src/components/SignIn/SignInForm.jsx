@@ -4,7 +4,7 @@ import theme from "../../theme.js";
 import Text from "../Text.jsx";
 import FormikTextInput from "../FormikTextInput.jsx";
 
-const SignInForm = () => {
+const SignInForm = ({onSubmit}) => {
   const styles = StyleSheet.create({
     container: {
       paddingHorizontal: "5%",
@@ -27,7 +27,7 @@ const SignInForm = () => {
         name={"password"}
         secureTextEntry
       />
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={onSubmit}>
         <Text style={styles.button} fontSize={"subheading"}>
           Sign in
         </Text>
