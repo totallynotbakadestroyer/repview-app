@@ -32,16 +32,29 @@ const RepositoryInfo = ({
       <Image style={styles.avatar} source={{ uri: ownerAvatarUrl }} />
       <View style={{ marginLeft: "5%" }}>
         <View style={{ paddingBottom: 10 }}>
-          <Text fontWeight={"bold"} fontSize={"subheading"}>
+          <Text
+            testID={"repositoryFullName"}
+            fontWeight={"bold"}
+            fontSize={"subheading"}
+          >
             {fullName}
           </Text>
 
-          <Text fontSize={"body"} color={"textSecondary"}>
+          <Text
+            testID={"repositoryDescription"}
+            fontSize={"body"}
+            color={"textSecondary"}
+          >
             {description}
           </Text>
         </View>
         <View style={styles.language}>
-          <Text style={{ color: "#fff", padding: 4 }}>{language}</Text>
+          <Text
+            testID={"repositoryLanguage"}
+            style={{ color: "#fff", padding: 4 }}
+          >
+            {language}
+          </Text>
         </View>
       </View>
     </View>

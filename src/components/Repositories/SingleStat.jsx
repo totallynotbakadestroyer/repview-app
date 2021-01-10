@@ -2,7 +2,7 @@ import { View, StyleSheet } from "react-native";
 import Text from "../Text.jsx";
 import React from "react";
 
-const SingleStat = ({ name, count }) => {
+const SingleStat = ({ name, count, testID }) => {
   const styles = StyleSheet.create({
     container: {
       alignItems: "center",
@@ -12,7 +12,7 @@ const SingleStat = ({ name, count }) => {
 
   return (
     <View style={styles.container}>
-      <Text fontWeight={"bold"} fontSize={"subheading"}>
+      <Text testID={testID} fontWeight={"bold"} fontSize={"subheading"}>
         {count}
       </Text>
       <Text style={{ marginTop: 5 }} fontSize={"body"} color={"textSecondary"}>

@@ -16,7 +16,7 @@ const RepositoryStats = ({
     },
   });
 
-  const numToString = (number) => {
+   const numToString = (number) => {
     if (number < 1e3) return number;
     if (number >= 1e3 && number < 1e6) return +(number / 1e3).toFixed(1) + "k";
     if (number >= 1e6 && number < 1e9) return +(number / 1e6).toFixed(1) + "m";
@@ -26,10 +26,26 @@ const RepositoryStats = ({
 
   return (
     <View style={styles.container}>
-      <SingleStat name={"Stars"} count={numToString(stargazersCount)} />
-      <SingleStat name={"Forks"} count={numToString(forksCount)} />
-      <SingleStat name={"Reviews"} count={numToString(reviewCount)} />
-      <SingleStat name={"Rating"} count={numToString(ratingAverage)} />
+      <SingleStat
+        testID={"repositoryStargazersCount"}
+        name={"Stars"}
+        count={numToString(stargazersCount)}
+      />
+      <SingleStat
+        testID={"repositoryForksCount"}
+        name={"Forks"}
+        count={numToString(forksCount)}
+      />
+      <SingleStat
+        testID={"repositoryReviewCount"}
+        name={"Reviews"}
+        count={numToString(reviewCount)}
+      />
+      <SingleStat
+        testID={"repositoryRatingAverage"}
+        name={"Rating"}
+        count={numToString(ratingAverage)}
+      />
     </View>
   );
 };

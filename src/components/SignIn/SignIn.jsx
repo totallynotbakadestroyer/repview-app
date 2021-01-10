@@ -29,11 +29,21 @@ const SignIn = () => {
   };
 
   return (
-    <Formik
-      validationSchema={validationSchema}
-      initialValues={initialValues}
+    <SignInContainer
       onSubmit={onSubmit}
-    >
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+    />
+  );
+};
+
+export const SignInContainer = ({ onSubmit, ...props }) => {
+  const initialValues = {
+    username: "",
+    password: "",
+  };
+  return (
+    <Formik initialValues={initialValues} onSubmit={onSubmit} {...props}>
       {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
     </Formik>
   );
