@@ -2,6 +2,8 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import RepositoryStats from "./RepositoryStats.jsx";
 import RepositoryInfo from "./RepositoryInfo.jsx";
+import Button from "../Button.jsx";
+import * as Linking from "expo-linking";
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +17,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, single }) => {
+  const openGitHub = async () => {
+    await Linking.openURL(item.url);
+  };
+
   return (
     <View style={styles.container}>
       <RepositoryInfo
@@ -30,6 +36,13 @@ const RepositoryItem = ({ item }) => {
         reviewCount={item.reviewCount}
         ratingAverage={item.ratingAverage}
       />
+      {single ? (
+        <Button
+          onPress={openGitHub}
+          style={{ marginTop: 15 }}
+          text={"Open in GitHub"}
+        />
+      ) : null}
     </View>
   );
 };

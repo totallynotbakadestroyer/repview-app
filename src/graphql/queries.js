@@ -22,3 +22,13 @@ export const AUTHORIZED_USER = gql`
     }
   }
 `;
+
+export const GET_SINGLE_REPOSITORY = gql`
+  query findRepositoryById($idToSearch: ID!) {
+    repository(id: $idToSearch) {
+      ...RepositoryInfo
+      url
+    }
+  }
+  ${REPOSITORY_INFO}
+`;
