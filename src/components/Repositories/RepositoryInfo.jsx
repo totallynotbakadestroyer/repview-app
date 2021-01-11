@@ -1,5 +1,5 @@
 import { Image, View, StyleSheet } from "react-native";
-import Text from "../Text.jsx";
+import Text from "../utils/Text.jsx";
 import theme from "../../theme.js";
 import React from "react";
 
@@ -30,21 +30,23 @@ const RepositoryInfo = ({
   return (
     <View style={{ flexDirection: "row" }}>
       <Image style={styles.avatar} source={{ uri: ownerAvatarUrl }} />
-      <View style={{ marginLeft: "5%" }}>
-        <View style={{ paddingBottom: 10 }}>
-          <Text
-            testID={"repositoryFullName"}
-            fontWeight={"bold"}
-            fontSize={"subheading"}
-          >
-            {fullName}
-          </Text>
+      <View style={{ marginLeft: "5%", flexShrink: 1 }}>
+        <View style={{ paddingBottom: 10, flexShrink: 1 }}>
+          <View style={{ flexDirection: "row" }}>
+            <Text
+              testID={"repositoryFullName"}
+              fontWeight={"bold"}
+              fontSize={"subheading"}
+            >
+              {fullName}
+            </Text>
+          </View>
 
           <Text
             testID={"repositoryDescription"}
             fontSize={"body"}
             color={"textSecondary"}
-            style={{marginRight: "10%" }}
+            style={{ flexShrink: 1 }}
           >
             {description}
           </Text>
