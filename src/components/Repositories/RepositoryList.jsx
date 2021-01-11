@@ -1,16 +1,9 @@
 import React from "react";
-import { FlatList, View, StyleSheet, TouchableOpacity } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import RepositoryItem from "./RepositoryItem.jsx";
 import useRepositories from "../../hooks/useRepositories.js";
 import { useHistory } from "react-router-native";
-
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-});
-
-const ItemSeparator = () => <View style={styles.separator} />;
+import ItemSeparator from '../utils/ItemSeparator.jsx';
 
 const RenderItem = ({ item, handlePress }) => {
   return (

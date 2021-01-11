@@ -1,5 +1,5 @@
 import { gql } from "apollo-boost";
-import { REPOSITORY_INFO } from "./fragments.js";
+import { REPOSITORY_INFO, REVIEW_INFO } from "./fragments.js";
 
 export const GET_REPOSITORIES = gql`
   query {
@@ -28,7 +28,15 @@ export const GET_SINGLE_REPOSITORY = gql`
     repository(id: $idToSearch) {
       ...RepositoryInfo
       url
+      reviews {
+        edges {
+          node {
+            ...ReviewInfo
+          }
+        }
+      }
     }
   }
   ${REPOSITORY_INFO}
+  ${REVIEW_INFO}
 `;

@@ -44,6 +44,7 @@ const RepositoryInfo = ({
             testID={"repositoryDescription"}
             fontSize={"body"}
             color={"textSecondary"}
+            style={{marginRight: "10%" }}
           >
             {description}
           </Text>
