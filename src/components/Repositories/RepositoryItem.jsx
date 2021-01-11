@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import RepositoryStats from "./RepositoryStats.jsx";
 import RepositoryInfo from "./RepositoryInfo.jsx";
-import Button from "../Button.jsx";
+import Button from "../utils/Button.jsx";
 import * as Linking from "expo-linking";
 
 const styles = StyleSheet.create({

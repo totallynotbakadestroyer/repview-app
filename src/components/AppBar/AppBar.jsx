@@ -19,7 +19,8 @@ const AppBar = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={{ padding: "5%" }} horizontal>
-        <AppBarTab style={styles} text={"Repview"} link={"/"} />
+        <AppBarTab style={styles} text={"Repositories"} link={"/"} />
+        <AppBarTab style={styles} text={"Create a review"} link={"/create"} />
         {!loading && !data.authorizedUser ? (
           <AppBarTab style={styles} text={"Sign in"} link={"/sign-in"} />
         ) : (

@@ -1,7 +1,7 @@
 import { TouchableWithoutFeedback, StyleSheet } from "react-native";
 import Text from "./Text.jsx";
 import React from "react";
-import theme from "../theme.js";
+import theme from "../../theme.js";
 
 const Button = ({ onPress, text, style, ...props }) => {
   const styles = StyleSheet.create({

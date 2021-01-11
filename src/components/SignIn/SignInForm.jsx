@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import React from "react";
-import FormikTextInput from "../FormikTextInput.jsx";
-import Button from "../Button.jsx";
+import FormikTextInput from "../utils/FormikTextInput.jsx";
+import Button from "../utils/Button.jsx";
 
 const SignInForm = ({ onSubmit }) => {
   const styles = StyleSheet.create({
