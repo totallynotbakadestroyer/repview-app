@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { FlatList, TouchableOpacity } from "react-native";
 import RepositoryItem from "./RepositoryItem.jsx";
 import useRepositories from "../../hooks/useRepositories.js";
 import { useHistory } from "react-router-native";
-import ItemSeparator from '../utils/ItemSeparator.jsx';
+import ItemSeparator from "../utils/ItemSeparator.jsx";
+import RNPickerSelect from "react-native-picker-select";
 
 const RenderItem = ({ item, handlePress }) => {
   return (
@@ -13,7 +14,11 @@ const RenderItem = ({ item, handlePress }) => {
   );
 };
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({
+  repositories,
+  sortSettings,
+  setSortSettings,
+}) => {
   const history = useHistory();
   const handlePress = (item) => {
     history.push(`/${item.id}`);
@@ -24,6 +29,9 @@ export const RepositoryListContainer = ({ repositories }) => {
 
   return (
     <FlatList
+      ListHeaderComponent={() => (
+        <Picker sortSettings={sortSettings} setSortSettings={setSortSettings} />
+      )}
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({ item }) => (
@@ -34,8 +42,44 @@ export const RepositoryListContainer = ({ repositories }) => {
 };
 
 const RepositoryList = () => {
-  const { repositories } = useRepositories();
+  const [sortSettings, setSortSettings] = useState({
+    orderBy: "CREATED_AT",
+    orderDirection: "DESC",
+  });
+  const { repositories } = useRepositories(sortSettings);
 
-  return <RepositoryListContainer repositories={repositories} />;
+  return (
+    <RepositoryListContainer
+      setSortSettings={setSortSettings}
+      repositories={repositories}
+    />
+  );
 };
+
+const Picker = ({ setSortSettings }) => {
+  const handleChange = (value) => {
+    if (!value) return;
+    setSortSettings(value);
+  };
+  return (
+    <RNPickerSelect
+      onValueChange={(value) => handleChange(value)}
+      items={[
+        {
+          label: "Latest repositories",
+          value: { orderBy: "CREATED_AT", orderDirection: "DESC" },
+        },
+        {
+          label: "Highest rated repositories",
+          value: { orderBy: "RATING_AVERAGE", orderDirection: "DESC" },
+        },
+        {
+          label: "Lowest rated repositories",
+          value: { orderBy: "RATING_AVERAGE", orderDirection: "ASC" },
+        },
+      ]}
+    />
+  );
+};
+
 export default RepositoryList;

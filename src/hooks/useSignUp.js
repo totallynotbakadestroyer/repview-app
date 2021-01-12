@@ -10,7 +10,7 @@ const useSignUp = () => {
     await mutate({
       variables: { userPayload: { username, password } },
     });
-    return await signIn({ username, password });
+    return signIn({username, password});
   };
 
   return [signUp, result];
