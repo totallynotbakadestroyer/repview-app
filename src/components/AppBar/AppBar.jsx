@@ -22,7 +22,10 @@ const AppBar = () => {
         <AppBarTab style={styles} text={"Repositories"} link={"/"} />
         <AppBarTab style={styles} text={"Create a review"} link={"/create"} />
         {!loading && !data.authorizedUser ? (
-          <AppBarTab style={styles} text={"Sign in"} link={"/sign-in"} />
+          <View style={{ flexDirection: "row" }}>
+            <AppBarTab style={styles} text={"Sign in"} link={"/sign-in"} />
+            <AppBarTab style={styles} text={"Sign up"} link={"/sign-up"} />
+          </View>
         ) : (
           <SignOutTab />
         )}

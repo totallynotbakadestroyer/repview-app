@@ -16,3 +16,10 @@ export const CREATE_REVIEW = gql`
     }
   }
 `;
+export const CREATE_USER = gql`
+  mutation signUp($userPayload: CreateUserInput) {
+    createUser(user: $userPayload) {
+      username
+    }
+  }
+`;
