@@ -25,3 +25,12 @@ export const REVIEW_INFO = gql`
     }
   }
 `;
+
+export const PAGE_INFO = gql`
+  fragment PageInfo on PageInfo {
+    endCursor
+    startCursor
+    totalCount
+    hasNextPage
+  }
+`;

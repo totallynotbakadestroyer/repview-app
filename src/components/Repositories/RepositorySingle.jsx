@@ -1,34 +1,37 @@
 import React from "react";
 import RepositoryItem from "./RepositoryItem.jsx";
-import { useQuery } from "@apollo/react-hooks";
-import { GET_SINGLE_REPOSITORY } from "../../graphql/queries.js";
 import { useParams } from "react-router-native";
 import { FlatList } from "react-native";
 import ItemSeparator from "../utils/ItemSeparator.jsx";
 import ReviewItem from "../Reviews/ReviewItem.jsx";
+import useSingleRepository from "../../hooks/useSingleRepository.js";
 
 const RepositorySingle = () => {
   const { id } = useParams();
-  const { data, loading } = useQuery(GET_SINGLE_REPOSITORY, {
-    fetchPolicy: "cache-and-network",
-    variables: { idToSearch: id },
+  const { repository, fetchMore, loading } = useSingleRepository({
+    first: 5,
+    idToSearch: id,
   });
 
   if (loading) {
     return null;
   }
-  const reviewNodes = data
-    ? data.repository.reviews.edges.map((edge) => edge.node)
-    : [];
+
+  const onEndReach = async () => {
+    console.log("yeah")
+    await fetchMore();
+  }
 
   return (
     <FlatList
       ListHeaderComponent={() => (
-        <RepositoryItem single={true} item={data.repository} />
+        <RepositoryItem single={true} item={repository} />
       )}
-      data={reviewNodes}
+      data={repository.reviews.edges}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => <ReviewItem review={item} />}
+      renderItem={({ item }) => <ReviewItem review={item.node} />}
+      keyExtractor={({ id }) => id}
+      onEndReached={onEndReach}
     />
   );
 };

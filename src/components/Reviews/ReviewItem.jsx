@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
 });
 
 const ReviewItem = ({ review }) => {
-  console.log(review);
   return (
     <View style={{ flexDirection: "row", padding: "5%" }}>
       <View style={styles.circle}>

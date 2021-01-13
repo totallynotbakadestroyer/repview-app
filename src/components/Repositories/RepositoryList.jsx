@@ -22,7 +22,17 @@ const RepositoryList = () => {
   });
   const history = useHistory();
   const [keyword, setKeyword] = useState("");
-  const { repositories } = useRepositories(sortSettings, keyword);
+  const { repositories, fetchMore } = useRepositories({
+    first: 5,
+    ...sortSettings,
+    searchKeyword: keyword
+  });
+  const onEndReach = async () => {
+    await fetchMore();
+  };
+  if(!repositories) {
+    return null;
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -32,6 +42,7 @@ const RepositoryList = () => {
         setKeyword={setKeyword}
         repositories={repositories}
         history={history}
+        onEndReach={onEndReach}
       />
     </View>
   );
@@ -70,19 +81,16 @@ export class RepositoryListContainer extends React.Component {
   handlePress = (item) => {
     this.props.history.push(`/${item.id}`);
   };
-  repositoryNodes = () => this.props.repositories
-    ? this.props.repositories.edges.map((edge) => edge.node)
-    : [];
   render() {
-    console.log(this.repositoryNodes())
     return (
       <FlatList
-        data={this.repositoryNodes()}
-        keyExtractor={({ id }) => id}
+        data={ this.props.repositories.edges}
         ItemSeparatorComponent={ItemSeparator}
         renderItem={({ item }) => (
-          <RenderItem item={item} handlePress={() => this.handlePress(item)} />
+          <RenderItem item={item.node} handlePress={() => this.handlePress(item.node)} />
         )}
+        onEndReached={this.props.onEndReach}
+        keyExtractor={({ cursor }) => cursor}
       />
     );
   }
