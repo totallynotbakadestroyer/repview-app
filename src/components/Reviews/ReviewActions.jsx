@@ -1,5 +1,5 @@
 import Button from "../utils/Button.jsx";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import React from "react";
 import useReview from "../../hooks/useReview.js";
 import { useHistory } from "react-router-native";
@@ -9,6 +9,17 @@ const ReviewActions = ({ review }) => {
     deleteReview: [deleteReview],
   } = useReview();
   const history = useHistory();
+  const openConfirm = () => {
+    Alert.alert(
+      "Delete review",
+      "Are you sure you want to delete this review",
+      [
+        { text: "Cancel", style: "cancel" },
+        { text: "Delete", onPress: () => deleteReview(review.id) },
+      ],
+      { cancelable: true }
+    );
+  };
   return (
     <View
       style={{
@@ -23,7 +34,7 @@ const ReviewActions = ({ review }) => {
         text={"View repository"}
       />
       <Button
-        onPress={() => deleteReview(review.id)}
+        onPress={() => openConfirm()}
         style={{ width: "48%" }}
         color={"danger"}
         text={"Delete review"}
@@ -31,4 +42,5 @@ const ReviewActions = ({ review }) => {
     </View>
   );
 };
+
 export default ReviewActions;
