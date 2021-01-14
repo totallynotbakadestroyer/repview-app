@@ -3,9 +3,10 @@ import { AUTHORIZED_USER } from "../graphql/queries.js";
 
 const useCurrentUser = (variables) => {
   const { data, loading, fetchMore } = useQuery(AUTHORIZED_USER, {
-    fetchPolicy: "cache-first",
+    fetchPolicy: "network-only",
     variables,
   });
+
   const handleFetchMore = async () => {
     const canFetchMore =
       !loading && data && data.authorizedUser.reviews.pageInfo.hasNextPage;

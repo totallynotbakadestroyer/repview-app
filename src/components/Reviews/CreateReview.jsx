@@ -2,12 +2,12 @@ import React from "react";
 import { Formik } from "formik";
 import CreateReviewForm from "./CreateReviewForm.jsx";
 import * as yup from "yup";
-import useCreateReview from "../../hooks/useCreateReview.js";
+import useReview from "../../hooks/useReview.js";
 import {useHistory} from 'react-router-native';
 
 const CreateReview = () => {
   const history = useHistory();
-  const [createReview] = useCreateReview();
+  const {createReview: [createReview]} = useReview();
   const validationSchema = yup.object().shape({
     repositoryOwnerName: yup.string().required("Owner name is required"),
     repositoryName: yup.string().required("Repository name is required"),
