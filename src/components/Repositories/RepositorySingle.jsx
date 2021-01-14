@@ -18,7 +18,6 @@ const RepositorySingle = () => {
   }
 
   const onEndReach = async () => {
-    console.log("yeah")
     await fetchMore();
   }
 
@@ -30,7 +29,7 @@ const RepositorySingle = () => {
       data={repository.reviews.edges}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({ item }) => <ReviewItem review={item.node} />}
-      keyExtractor={({ id }) => id}
+      keyExtractor={({ cursor }) => cursor}
       onEndReached={onEndReach}
     />
   );

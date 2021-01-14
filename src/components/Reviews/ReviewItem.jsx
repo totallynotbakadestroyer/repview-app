@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ReviewItem = ({ review }) => {
+const ReviewItem = ({ review, currentUser }) => {
   return (
     <View style={{ flexDirection: "row", padding: "5%" }}>
       <View style={styles.circle}>
@@ -30,7 +30,7 @@ const ReviewItem = ({ review }) => {
             fontWeight={"bold"}
             fontSize={"subheading"}
           >
-            {review.user.username}
+            {currentUser ? review.repository.fullName : review.user.username}
           </Text>
           <Text testID={"reviewDate"} fontSize={"body"} color={"textSecondary"}>
             {review.createdAt}

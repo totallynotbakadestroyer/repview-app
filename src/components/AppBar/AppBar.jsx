@@ -2,9 +2,9 @@ import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import AppBarTab from "./AppBarTab.jsx";
-import { useQuery } from "@apollo/react-hooks";
-import { AUTHORIZED_USER } from "../../graphql/queries.js";
-import SignOutTab from "./SignOutTab.jsx";
+import LoggedInTabs from "./LoggedInTabs.jsx";
+import LoggedOutTabs from "./LoggedOutTabs.jsx";
+import useCurrentUser from "../../hooks/useCurrentUser.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,20 +14,16 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-  const { data, loading } = useQuery(AUTHORIZED_USER);
+  const { data, loading } = useCurrentUser();
   console.log(data);
   return (
     <View style={styles.container}>
       <ScrollView style={{ padding: "5%" }} horizontal>
-        <AppBarTab style={styles} text={"Repositories"} link={"/"} />
-        <AppBarTab style={styles} text={"Create a review"} link={"/create"} />
+        <AppBarTab text={"Repositories"} link={"/"} />
         {!loading && !data.authorizedUser ? (
-          <View style={{ flexDirection: "row" }}>
-            <AppBarTab style={styles} text={"Sign in"} link={"/sign-in"} />
-            <AppBarTab style={styles} text={"Sign up"} link={"/sign-up"} />
-          </View>
+          <LoggedOutTabs />
         ) : (
-          <SignOutTab />
+          <LoggedInTabs />
         )}
       </ScrollView>
     </View>
